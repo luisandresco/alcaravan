@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sicalis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="overlay d-none" id="overlay"></div>
+    <section class="container mt-5">
+        <div class="row">
+            <div class="d-flex justify-content-center center d-none" id="spinner">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div class="col-md-8 offset-md-2 col-12">
+
+                <section class="container">
+                    <div class="row">
+
+                        <div class="offset-md-2 col-md-8 offset-1 col-11  fw-bold text-secondary text-center">
+                            <h1>Solicitud de cita</h1>
+                        </div>
+                        <div class="offset-md-2 col-md-8 offset-1 col-11">
+                            <select class="form-select mt-2" type="text" name="pacientes" id="pacientesSelect">
+                                <option>Seleccione el nombre del paciente</option>
+                            </select>
+                        </div>
+                        <div class="offset-md-2 col-md-4 mt-4 offset-1 col-11">
+                            <input type="text" class="form-control" placeholder="Nombre" id="nombre" disabled>
+                        </div>
+                        <div class="col-md-4 mt-4 offset-md-0 offset-1 col-11">
+                            <input type="text" class="form-control" placeholder="Apellido" id="apellido" disabled>
+                        </div>
+
+                        <div class="offset-md-2 col-md-4 mt-4 offset-1 col-11">
+                            <input type="text" class="form-control" placeholder="Cedula" id="cedula" disabled>
+                        </div>
+                        <div class="col-md-4 mt-4 offset-md-0 offset-1 col-11">
+                            <input type="text" class="form-control" placeholder="Edad" id="edad" disabled>
+                        </div>
+
+                        <div class="offset-md-2 col-md-2 offset-1 col-11 mt-4">
+                            <p class="m-0 mt-2">
+                                Especialidad
+                            </p>
+                        </div>
+                        <div class="col-md-6 mt-4 offset-md-0 offset-1 col-11">
+                            <select class="form-select mt-2" type="text" name="especialidad" id="especialidadesSelect">
+                                <option>Seleccione la especialidad</option>
+                            </select>
+                        </div>
+
+
+                        <div class="offset-md-2 col-md-2 offset-1 col-11 mt-4">
+                            <p class="m-0 mt-2">
+                                Prof. Salud
+                            </p>
+                        </div>
+                        <div class="col-md-6 mt-4 offset-md-0 offset-1 col-11">
+                            <select class="form-select" type="text" name="especialidad" id="healthProfSelect">
+                                <option>Seleccione el prof. de la salud</option>
+                            </select>
+                        </div>
+
+
+                        <div class="offset-md-2 col-md-2 offset-1 col-11 mt-4">
+                            <p class="m-0 mt-2">
+                                Fecha
+                            </p>
+                        </div>
+                        <div class="col-md-6 mt-4 offset-md-0 offset-1 col-11">
+                            <select class="form-select" type="text" name="horario" id="fechaSelect">
+                                <option value="null">Seleccione fecha </option>
+                            </select>
+                        </div>
+
+                        <div class="offset-md-2 col-md-2 offset-1 col-11 mt-4">
+                            <p class="m-0 mt-2">
+                                Hora
+                            </p>
+                        </div>
+                        <div class="col-md-6 mt-4 offset-md-0 offset-1 col-11">
+                            <select class="form-select" type="text" name="horario" id="hourSelect">
+                                <option value="null">Seleccione hora</option>
+                            </select>
+                        </div>
+
+                        <div class="offset-md-2 col-md-2 mt-4 offset-1 col-11 pe-0">
+                            <p class="m-0 mt-2 d-inline-block">Tipo de visita</p>
+                        </div>
+                        <div class="col-md-6 mt-4 offset-md-0 offset-1 col-11">
+                            <select class="form-select" type="text" id="tipo-visita">
+                                <option value="null">Seleccione el tipo de visita</option>
+                                <option value="new">Nueva condición de salud</option>
+                                <option value="followup">Seguimiento</option>
+                                <option value="well_child">Visita de niño sano</option>
+                                <option value="well_woman">Visita de mujer sana</option>
+                                <option value="well_man">Visita de hombre sano</option>
+
+                            </select>
+                        </div>
+                        <div class="offset-md-2 col-md-8  offset-1 col-11 mt-4">
+                            <button class="btn btn-primary form-control" disabled id="registrarBtn">Registrar</button>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+
+
+    <nav id="menu">
+        <ul>
+            <li><a href=" #">
+                    <i class="fa-solid fa-bars" onclick="ocultarMenu()"></i>
+                </a>
+            </li>
+            <li><a href="Sicalis-login-registered-HOME-patient-confirmed">
+                    <i class=" fas fa-home"></i>
+                    <span class="nav-item">Inicio</span>
+                </a></li>
+            <li><a href="Sicalis-register-Appointment_confirmation_status_patient">
+                    <i class="fas fa-calendar-check"></i>
+                    <span class="nav-item">Solicitar citas</span>
+                </a></li>
+            <!-- <li><a href="#">
+                    <i class="fas fa-solid fa-calendar-days"></i>
+                    <span class="nav-item">Estado de cita</span>
+                </a></li>
+            <li><a href="#">
+                    <i class="fa-solid fa-notes-medical"></i>
+                    <span class="nav-item">Historial </span>
+                </a></li>
+            <li><a href="#">
+                    <i class="fas fa-cog"></i>
+                    <span class="nav-item">Configuración</span>
+                </a></li> -->
+            <li><a href="Sicalis-exit-session" class="logout" onclick="salir()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="nav-item">Salir</span>
+                </a></li>
+        </ul>
+    </nav>
+</body>
+<script>
+    // Obtener la referencia al campo de entrada de fecha y hora
+    var input = document.getElementById("hourSelect");
+
+    // Agregar un evento de escucha para cuando se seleccione una nueva fecha y hora
+    input.addEventListener("change", function () {
+        // Obtener el valor seleccionado en el campo de entrada de fecha y hora
+        var selectedDateTime = input.value;
+
+        // Imprimir el valor seleccionado por consola
+    });
+    cont = 0
+    const menu = document.querySelector('#menu');
+    function ocultarMenu() {
+        if (cont == 0) {
+            cont++
+            menu.classList.add('nav-anime');
+        } else {
+            menu.classList.remove('nav-anime')
+            cont = 0
+        }
+    }
+    window.onload = function () {
+        var miValor = sessionStorage.getItem('miClave') === 'true';
+
+            // Usar el valor en una declaración if/else
+            if (miValor) {
+                console.log('Sesión activa');
+            } else {
+                localStorage.clear()
+                window.location.href = "Sicalis-login";
+            }
+        const showed = localStorage.getItem("cedula");
+        const request = new XMLHttpRequest();
+
+        request.onload = function () {
+            const response = JSON.parse(request.response);
+            const select = document.getElementById('pacientesSelect');
+            const pacientes = {}; // Objeto para guardar los pacientes con sus IDs
+
+            response.pacientes.forEach(paciente => {
+                const option = document.createElement('option');
+                option.value = paciente.nombre + ' ' + paciente.apellido;
+                option.text = paciente.nombre + ' ' + paciente.apellido;
+                select.add(option);
+                // Agrega el paciente al objeto con su ID
+                pacientes[paciente.nombre + ' ' + paciente.apellido] = {
+                    idfederation: paciente.idfederation,
+                    idpaciente: paciente.idpaciente
+                    
+                };
+            });
+            requestSpeciality()
+            // Guarda el objeto de pacientes en el localStorage
+            localStorage.setItem('pacientes', JSON.stringify(pacientes));
+        }
+
+        request.open('POST', '/crear_citas');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+
+        // Envía el token y la cédula en el cuerpo de la solicitud HTTP
+        request.send('&cedula=' + encodeURIComponent(showed));
+    }
+    function requestSpeciality(){
+        // Nueva solicitud para cargar el segundo select
+        const reques = new XMLHttpRequest();
+        reques.onload = function () {
+            const response = JSON.parse(reques.response);
+            const select = document.getElementById('especialidadesSelect');
+            const especialidades = {}; // Objeto para guardar las especialidades con sus IDs
+
+            response.especialidades.forEach(especialidad => {
+                const option = document.createElement('option');
+                option.value = especialidad.nombre;
+                option.text = especialidad.nombre;
+                select.add(option);
+
+                // Agrega la especialidad al objeto con su ID
+                especialidades[especialidad.nombre] = especialidad.id;
+            });
+
+            // Guarda el objeto de especialidades en el localStorage
+            localStorage.setItem('especialidades', JSON.stringify(especialidades));
+        }
+        reques.open('POST', '/selected-autocomplete-specialty');
+        reques.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+
+        // Envía la solicitud HTTP para obtener las especialidades
+        reques.send();
+
+        const select2 = document.getElementById('especialidadesSelect');
+        select2.onchange = function (e) {
+            // Obtiene el objeto de especialidades del localStorage
+            const especialidades = JSON.parse(localStorage.getItem('especialidades'));
+
+            // Obtiene el nombre de la especialidad seleccionada
+            const selectedOption = select2.options[select2.selectedIndex].value;
+
+            // Obtiene el ID de la especialidad a partir de su nombre
+            const id2 = especialidades[selectedOption];
+            enviarHealthprof(id2)
+        }
+    }
+    //hasta aqui
+    const select = document.getElementById('pacientesSelect');
+    select.onchange = function () {
+        // Obtiene el objeto de pacientes del localStorage
+        const pacientes = JSON.parse(localStorage.getItem('pacientes'));
+
+        // Obtiene el nombre y apellido del paciente seleccionado
+        const selectedOption = select.options[select.selectedIndex].value;
+
+        // Obtiene el objeto del paciente a partir de su nombre y apellido
+        const paciente = pacientes[selectedOption];
+
+        // Obtiene el idfederation del paciente seleccionado
+        const idfederation = paciente.idfederation;
+
+        // Llama a la función enviarSolicitud() para hacer la solicitud POST
+        enviarSolicitud(idfederation);
+    }
+
+    function enviarSolicitud(federation) {
+        const request = new XMLHttpRequest();
+
+        request.onload = function () {
+            const response = JSON.parse(request.response);
+            const terceros = response.terceroS;
+            if (terceros.length > 0) {
+                const tercero = terceros[0]; // Solo se toma el primer tercero encontrado
+                document.getElementById('nombre').value = tercero.nombre;
+                document.getElementById('apellido').value = tercero.apellido;
+                document.getElementById('cedula').value = tercero.cedula;
+                document.getElementById('edad').value = tercero.edad;
+            } else {
+                // Si no se encontraron terceros, se limpian los inputs
+                document.getElementById('nombre').value = '';
+                document.getElementById('apellido').value = '';
+                document.getElementById('cedula').value = '';
+                document.getElementById('edad').value = '';
+            }
+        };
+
+        request.open('POST', '/selected-autocomplete');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+
+        // Envía el valor de la federación en el cuerpo de la solicitud HTTP
+        request.send('federation=' + encodeURIComponent(federation));
+    }
+    function enviarHealthprof(specialty) {
+        const request = new XMLHttpRequest();
+
+        request.onload = function () {
+            const response = JSON.parse(request.response);
+            const select = document.getElementById('healthProfSelect');
+
+            // Limpia el contenido del select antes de agregar nuevas opciones
+            select.innerHTML = '';
+            response.healthprof.forEach(healthp => {
+                const option = document.createElement('option');
+                option.value = healthp.id; // Cambia el valor a ID en lugar de nombre y apellido
+                option.text = healthp.nombre + ' ' + healthp.apellido;
+                select.add(option);
+            });
+            recibirHorarios()
+        }
+        request.open('POST', '/selected-autocomplete-healthprof');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+        // Envía el valor de la federación en el cuerpo de la solicitud HTTP
+        request.send('specialty=' + encodeURIComponent(specialty));
+    }
+    const selecthp = document.getElementById('healthProfSelect');
+    selecthp.onchange = function () {
+        recibirHorarios()
+    }
+    
+    const tipoVisita = document.getElementById("tipo-visita");
+    tipoVisita.addEventListener("change", () => {
+        const valorSeleccionado = tipoVisita.value;
+    });
+    function recibirHorarios() {
+        const request = new XMLHttpRequest();
+        const hp = document.getElementById('healthProfSelect').value;
+        const especialidades = JSON.parse(localStorage.getItem('especialidades'));
+        const pacientes = JSON.parse(localStorage.getItem('pacientes'));
+        const especialidadNombre = document.getElementById('especialidadesSelect').value;
+        const esp = especialidades[especialidadNombre];
+
+
+        request.onload = function () {
+            const response = JSON.parse(request.response);
+            const status = request.status
+            const alert = document.querySelector('#alert');
+
+            if(status == 200){
+                const fechaSelect = document.getElementById('fechaSelect');
+                const horaSelect = document.getElementById('hourSelect');
+
+                // Limpia el contenido del select de fechas antes de agregar nuevas opciones
+                fechaSelect.innerHTML = '';
+
+                response.fechas.forEach(fecha => {
+                    const option = document.createElement('option');
+                    option.value = fecha;
+                    option.text = fecha;
+                    fechaSelect.add(option);
+                });
+                ordenarFechas()
+                
+                // Función para cargar las horas en el segundo select según la fecha seleccionada
+                function cargarHoras(fecha) {
+                    horaSelect.innerHTML = '';
+                    response.horarios[fecha].forEach(horario => {
+                        const option = document.createElement('option');
+                        option.value = horario.id;
+                        option.text = horario.hora;
+                        horaSelect.add(option);
+                        ordenarHoras()
+                    });
+
+                }
+
+                // Cargar las horas iniciales
+                cargarHoras(fechaSelect.value);
+
+                // Actualizar las horas cuando se selecciona una fecha
+                fechaSelect.addEventListener('change', function () {
+                    let fechaSeleccionada = this.value;
+                    cargarHoras(fechaSeleccionada);
+                });
+            }else{
+                                // Para fechaSelect
+                var fechaSelect = document.getElementById("fechaSelect");
+                fechaSelect.innerHTML = '';
+                var defaultOption = document.createElement("option");
+                defaultOption.text = "Seleccione fecha";
+                defaultOption.value = "";
+                fechaSelect.add(defaultOption);
+                fechaSelect.selectedIndex = 0;
+
+                // ParaSelect
+                var hourSelect = document.getElementById("hourSelect");
+                hourSelect.innerHTML = '';
+                var defaultOption = document.createElement("option");
+                defaultOption.text = "Seleccione hora";
+                defaultOption.value = "";
+                hourSelect.add(defaultOption);
+                hourSelect.selectedIndex = 0;
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: response.error,
+                    showConfirmButton: true,
+                    confirmButtonColor: '#0d6efd',
+                    confirmButtonText: 'Aceptar',
+                    customClass: {
+                      popup: 'my-swal-font-size',
+                    }
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                    }
+                })
+            }
+        }
+        request.open('POST', '/selected-autocomplete-schedule');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+
+        // Envía el valor de la federación en el cuerpo de la solicitud HTTP
+        request.send('hp=' + encodeURIComponent(hp) + '&esp=' + encodeURIComponent(esp));
+    }
+    
+
+    // Agrega un event listener al botón "Registrar"
+    document.getElementById('registrarBtn').addEventListener('click', createAppointment);
+
+    function createAppointment() {
+        var name = document.getElementById("nombre").value;
+        var apell = document.getElementById("apellido").value;
+        var ced = document.getElementById("cedula").value;
+        var eda = document.getElementById("edad").value;
+        var specialty = document.getElementById('especialidadesSelect').value;
+        var healthPro = document.getElementById("healthProfSelect");
+        var selectedOptionhp = healthPro.options[healthPro.selectedIndex];
+        var healthproV = selectedOptionhp.text;
+        var fechas = document.getElementById('fechaSelect').value;
+        var horas = document.getElementById('hourSelect');
+        var selectedOptionhr = horas.options[horas.selectedIndex];
+        var horaV = selectedOptionhr.text;
+        var specialty = document.getElementById('especialidadesSelect').value;
+        var tipos = document.getElementById('tipo-visita');
+        var selectedOptiontp = tipos.options[tipos.selectedIndex];
+        var tipoide = selectedOptiontp.text;
+        const cedul = localStorage.getItem("cedula");
+        const especialidadID = JSON.parse(localStorage.getItem('especialidades'));
+        const espID = especialidadID[specialty];
+        const request = new XMLHttpRequest();
+        const spinner = document.querySelector('#spinner');
+        spinner.classList.remove('d-none');
+
+        const overlay = document.querySelector('#overlay');
+        overlay.classList.remove('d-none');
+
+        request.onload = function () {
+            try{
+            console.log(healthproV)
+            const response = JSON.parse(request.response);
+            if(request.status == 200){
+                console.log(request.status)
+                spinner.classList.add('d-none');
+                overlay.classList.add('d-none')
+                const mensaje = `<p >El código de su cita es: \n <span class="text-primary">${response.mensaje}</span></p>`;
+                Swal.fire({
+                    html: `
+                      <div class="container">
+                          <div class="row mb-3">
+                            <img src="https://cdn-icons-png.flaticon.com/512/212/212804.png" style="width: 50px; height: 50px; position: absolute; top:0; left: 20px; top: 10px; padding: 0px;">
+                              <div class="col-12 text-end">
+                                <label for="codigoCita" class="form-label">Código de Cita: <span class="text-primary fw-bold">${response.mensaje}</span></label>    
+                              </div>
+                          </div>
+                          <div class="card">
+                              <div class="card-header">
+                                  <p class="h5" style="margin: 8px 8px 8px 8px; font-size:18px;"><strong>Resumen de Cita</strong></p>
+                              </div>
+                              <div class="card-body">
+                                  <div class="row text-start ">
+                                      <div class="col-md-6 col-12">
+                                          <p style="font-size: 16px;"><strong>Datos del Paciente</strong></p>
+                                          <p style="font-size:16px;"><strong>Nombre:</strong> ${name}</p>
+                                          <p style="font-size:16px;"><strong>Apellido:</strong> ${apell}</p>
+                                          <p style="font-size:16px;"><strong>Cédula:</strong> ${ced}</p>
+                                          <p style="font-size:16px;"><strong>Edad:</strong> ${eda}</p>
+                                      </div>
+                                      <div class="col-md-6 col-12">
+                                          <p style="font-size: 16px;"><strong>Datos de la Cita</strong></p>
+                                          <p style="font-size:16px;"><strong>Prof. Salud:</strong> ${healthproV}</p>
+                                          <p style="font-size:16px;"><strong>Especialidad:</strong> ${specialty}</p>
+                                          <p style="font-size:16px;"><strong>Fecha:</strong> ${fechas}</p>
+                                          <p style="font-size:16px;"><strong>Hora:</strong> ${horaV}</p>
+                                          <p style="font-size:16px;"><strong>Tipo:</strong> ${tipoide}</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    `,
+    
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#0d6efd',
+                    showCloseButton: true,
+                    width: 'auto',
+                    padding: '3em'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'Sicalis-login-registered-HOME-patient-confirmed'
+                    }
+                    cleared()
+                })
+            }else if (request.status == 206){
+                spinner.classList.add('d-none');
+                overlay.classList.add('d-none')
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Disculpe, usted ya posee una cita registrada con esa especialidad.',
+                    showConfirmButton: true,
+                    confirmButtonColor: '#0d6efd',
+                    confirmButtonText: 'Aceptar',
+                    customClass: {
+                      popup: 'my-swal-font-size',
+                    }
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                       clear2()
+                    }
+                })
+            }else{}
+            } finally{
+                clear2()
+            }
+
+        }
+
+        // Obtener los valores del formulario y enviarlos al servidor
+        // ...
+
+        const registrarBtn = document.getElementById("registrarBtn");
+        registrarBtn.addEventListener("click", function () {
+            createAppointment();
+        });
+
+        const pacientes = JSON.parse(localStorage.getItem('pacientes'));
+
+        // Obtiene los valores de los campos y elementos select
+        const citaID = document.getElementById('hourSelect').value;
+        const tipoVisita = document.getElementById('tipo-visita').value;
+        const pacienteNombre = document.getElementById('pacientesSelect').value;
+        const pacienteData = pacientes[pacienteNombre]; // Obtiene los datos del paciente
+        const idpaciente = pacienteData.idpaciente; // Obtiene el ID del paciente
+
+        request.open('POST', '/create-appointment');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+
+        // Separa los parámetros de la solicitud con "&"
+        const params = `tipoVisita=${encodeURIComponent(tipoVisita)}&idpaciente=${encodeURIComponent(idpaciente)}&citaID=${encodeURIComponent(citaID)}&name=${encodeURIComponent(name)}&apell=${encodeURIComponent(apell)}&ced=${encodeURIComponent(ced)}&eda=${encodeURIComponent(eda)}&healthproV=${encodeURIComponent(healthproV)}&specialty=${encodeURIComponent(specialty)}&fechas=${encodeURIComponent(fechas)}&horaV=${encodeURIComponent(horaV)}&tipoide=${encodeURIComponent(tipoide)}&cedul=${encodeURIComponent(cedul)}&espID=${encodeURIComponent(espID)}`;
+        request.send(params);
+
+        // Imprime los valores en la consola
+    }
+    // hablitar formulario para enviar cuando todos los datos esten seleccionado
+    const paciente = document.querySelector('#pacientesSelect');
+    const especialidad = document.querySelector('#especialidadesSelect');
+    const profSalud = document.querySelector('#healthProfSelect');
+    const horario = document.querySelector('#hourSelect');
+    const tipovisita = document.querySelector('#tipo-visita');
+    const registrarBtn = document.querySelector('#registrarBtn');
+
+    function habilitarBoton() {
+        if (especialidad.value != 'null' && profSalud.value && horario.value && tipovisita.value != 'null' && paciente.value != 'Seleccione el nombre del paciente') {
+            registrarBtn.disabled = false;
+        } else {
+            registrarBtn.disabled = true;
+        }
+    }
+
+    paciente.addEventListener('change', habilitarBoton);
+    especialidad.addEventListener('change', habilitarBoton);
+    profSalud.addEventListener('change', habilitarBoton);
+    horario.addEventListener('change', habilitarBoton);
+    tipovisita.addEventListener('change', habilitarBoton);
+
+    function cleared(){
+        document.getElementById("nombre").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("cedula").value = "";
+        document.getElementById("edad").value = "";
+        document.getElementById("pacientesSelect").selectedIndex = 0;
+        document.getElementById("especialidadesSelect").selectedIndex = 0;
+        document.getElementById("tipo-visita").selectedIndex = 0;
+
+        var healthProfSelect = document.getElementById("healthProfSelect");
+        healthProfSelect.innerHTML = '';
+        var defaultOption = document.createElement("option");
+        defaultOption.text = "Seleccione el prof. de la salud";
+        defaultOption.value = "";
+        healthProfSelect.insertBefore(defaultOption, healthProfSelect.options[0]);
+        healthProfSelect.selectedIndex = 0;
+
+        var fechaSelect = document.getElementById("fechaSelect");
+        fechaSelect.innerHTML = '';
+        var defaultOption = document.createElement("option");
+        defaultOption.text = "Seleccione fecha";
+        defaultOption.value = "";
+        fechaSelect.add(defaultOption);
+        fechaSelect.selectedIndex = 0;
+
+        // ParaSelect
+        var hourSelect = document.getElementById("hourSelect");
+        hourSelect.innerHTML = '';
+        var defaultOption = document.createElement("option");
+        defaultOption.text = "Seleccione hora";
+        defaultOption.value = "";
+        hourSelect.add(defaultOption);
+        hourSelect.selectedIndex = 0;
+
+    };
+    function clear2(){
+        document.getElementById("especialidadesSelect").selectedIndex = 0;
+        document.getElementById("tipo-visita").selectedIndex = 0;
+        document.getElementById("registrarBtn").disabled = true;
+
+        var healthProfSelect = document.getElementById("healthProfSelect");
+        healthProfSelect.innerHTML = '';
+        var defaultOption = document.createElement("option");
+        defaultOption.text = "Seleccione el prof. de la salud";
+        defaultOption.value = "";
+        healthProfSelect.insertBefore(defaultOption, healthProfSelect.options[0]);
+        healthProfSelect.selectedIndex = 0;
+
+        var fechaSelect = document.getElementById("fechaSelect");
+        fechaSelect.innerHTML = '';
+        var defaultOption = document.createElement("option");
+        defaultOption.text = "Seleccione fecha";
+        defaultOption.value = "";
+        fechaSelect.add(defaultOption);
+        fechaSelect.selectedIndex = 0;
+
+        // ParaSelect
+        var hourSelect = document.getElementById("hourSelect");
+        hourSelect.innerHTML = '';
+        var defaultOption = document.createElement("option");
+        defaultOption.text = "Seleccione hora";
+        defaultOption.value = "";
+        hourSelect.add(defaultOption);
+        hourSelect.selectedIndex = 0;
+
+    }
+    function salir(){
+        var miNuevoValor = false;
+        sessionStorage.setItem('miClave', miNuevoValor.toString());
+        sessionStorage.clear();
+        localStorage.clear()
+    }
+    function ordenarHoras() {
+        var selected = document.getElementById('hourSelect');
+        var options = Array.prototype.slice.call(selected.options);
+    
+        // Ordenamos las opciones
+        options.sort(function(a, b) {
+            return a.text.localeCompare(b.text);
+        });
+    
+        while (selected.firstChild) {
+            selected.removeChild(selected.firstChild);
+        }
+    
+        options.forEach(function(option) {
+            selected.appendChild(option);
+        });
+    
+        selected.selectedIndex = 0;
+    }
+    
+    function ordenarFechas() {
+        var selected = document.getElementById('fechaSelect');
+        var options = Array.prototype.slice.call(selected.options);
+    
+        // Ordenamos las opciones
+        options.sort(function(a, b) {
+            return a.text.localeCompare(b.text);
+        });
+    
+        while (selected.firstChild) {
+            selected.removeChild(selected.firstChild);
+        }
+    
+        options.forEach(function(option) {
+            selected.appendChild(option);
+        });
+    
+        selected.selectedIndex = 0;
+    }
+    
+    
+    
+    
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</html>

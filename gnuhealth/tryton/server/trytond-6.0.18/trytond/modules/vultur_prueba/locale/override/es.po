@@ -1,0 +1,7 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "model:ir.ui.menu,name:stock.menu_stock"
+msgid "Inventory & Stock"
+msgstr "Logisticaaa"

@@ -1,0 +1,52 @@
+[
+    {
+        "label": "ModelSQL",
+        "importPath": "trytond.model",
+        "description": "trytond.model",
+        "isExtraImport": true,
+        "detail": "trytond.model",
+        "documentation": {}
+    },
+    {
+        "label": "ModelView",
+        "importPath": "trytond.model",
+        "description": "trytond.model",
+        "isExtraImport": true,
+        "detail": "trytond.model",
+        "documentation": {}
+    },
+    {
+        "label": "fields",
+        "importPath": "trytond.model",
+        "description": "trytond.model",
+        "isExtraImport": true,
+        "detail": "trytond.model",
+        "documentation": {}
+    },
+    {
+        "label": "PoolMeta",
+        "importPath": "trytond.pool",
+        "description": "trytond.pool",
+        "isExtraImport": true,
+        "detail": "trytond.pool",
+        "documentation": {}
+    },
+    {
+        "label": "Party",
+        "kind": 6,
+        "importPath": "create_table_controller",
+        "description": "create_table_controller",
+        "peekOfCode": "class Party(metaclass=PoolMeta):\n    __name__ = 'party.party'\n    token = fields.Char('Token')\n    partyEmail = fields.Char('partyEmail')\nclass MedicalSpecialty(metaclass=PoolMeta):\n    __name__ = 'gnuhealth.specialty'\n    nameSpanish = fields.Char('spanish')",
+        "detail": "create_table_controller",
+        "documentation": {}
+    },
+    {
+        "label": "MedicalSpecialty",
+        "kind": 6,
+        "importPath": "create_table_controller",
+        "description": "create_table_controller",
+        "peekOfCode": "class MedicalSpecialty(metaclass=PoolMeta):\n    __name__ = 'gnuhealth.specialty'\n    nameSpanish = fields.Char('spanish')",
+        "detail": "create_table_controller",
+        "documentation": {}
+    }
+]

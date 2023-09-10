@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sicalis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="overlay d-none" id="overlay"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="center d-flex justify-content-center d-none " id="spinner">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6  m-auto">
+        <div class="card border-0 shadow">
+          <div class="pt-4 pb-4">
+            <div class="card-body px-5" id="card-one">
+              <h5 class="card-title text-center mb-4">Indique su correo electrónico</h5>
+              <select type="text" class="form-select option-title mb-4" name="correos" id="correosSelect">
+                <option>Seleccionar</option>
+              </select>
+              <button class="btn btn-primary form-control" id="sendEmailButton" onclick="bloquear()">Enviar clave
+                de
+                acceso</button>
+            </div>
+
+
+            <div class="scard-body px-5 d-none" id="card-two">
+              <h5 class="card-title text-center mb-3">
+                Introduza su clave de acceso enviado a su correo electrónico
+              </h5>
+
+              <div class="mt-3 mb-3">
+                <input type="text" class="form-control text-center mt-4" id="prueba">
+              </div>
+              <div class="mb-2">
+                <a href=" #" id="noRecibiCodigo">No recibí el código</a>
+              </div>
+              <div class="alert alert-danger d-none" id="alert" role="alert">
+                <div class="alert alert-warning d-none" id="alert" role="alert"></div>
+              </div>
+              <button class="form-control btn btn-primary button" type="submit" id="sendToken">Ingresar</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getCookie(name) {
+      const cookies = document.cookie.split("; ");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].split("=");
+        if (cookie[0] === name) {
+          return cookie[1];
+        }
+      }
+      return "";
+    }
+    const menu = document.querySelector('#card-one');
+    const menu2 = document.querySelector('#card-two');
+    const correosSelect = document.getElementById('correosSelect');
+    const sendEmailButton = document.getElementById('sendEmailButton');
+    const sendToken = document.getElementById('sendToken');
+
+    //spiner visible
+    spinner.classList.remove('d-none');
+    overlay.classList.remove('d-none');
+
+    window.onload = function () {
+      const showed = getCookie("cedula");   
+      const request = new XMLHttpRequest();
+
+      request.onload = function () {
+        const response = JSON.parse(request.response);
+
+        response.correos.forEach(correo => {
+          const option = document.createElement('option');
+          option.value = correo.correo;
+          option.text = correo.correo;
+          correosSelect.add(option);
+        });
+
+        //spiner invisible
+        spinner.classList.add('d-none');
+        overlay.classList.add('d-none');
+      }
+
+      request.open('POST', '/emails');
+      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+      request.send('&cedula=' + encodeURIComponent(showed));
+    }
+
+    sendEmailButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      enviarCorreo();
+    });
+
+    sendToken.addEventListener('click', (event) => {
+      event.preventDefault();
+      enviarSolicitud();
+    });
+    noRecibiCodigo.addEventListener('click', (event) => {
+      event.preventDefault();
+      enviarCorreo();
+    });
+    function ocultarMenu() {
+      var select = document.getElementById("correosSelect");
+      var selectedValue = select.options[select.selectedIndex].value;
+
+      if (selectedValue === "Seleccione su correo") {
+        select.classList.add('is-invalid');
+      } else {
+        select.classList.remove('is-invalid');
+        menu.classList.add('d-none');
+        menu2.classList.remove('d-none')
+
+      }
+    }
+
+    function enviarCorreo() {
+      var select = document.getElementById("correosSelect");
+      var selectedValue = select.options[select.selectedIndex].value;
+      if (selectedValue != "Seleccione su correo") {
+        const overlay = document.querySelector('#overlay');
+        const spinner = document.querySelector('#spinner');
+        spinner.classList.remove('d-none');
+        overlay.classList.remove('d-none');
+        const selectedText = correosSelect.value;
+        const request = new XMLHttpRequest();
+        const cedula = getCookie("cedula");   
+
+        request.onload = function () {
+          spinner.classList.add('d-none');
+          overlay.classList.add('d-none');
+          if (request.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Su clave de acceso ha sido enviando a su correo, por favor revise su bandeja de entrada o de spam.',
+              showConfirmButton: true,
+              confirmButtonColor: '#0d6efd',
+              confirmButtonText: 'Aceptar',
+              customClass: {
+                popup: 'my-swal-font-size',
+              }
+            });
+            ocultarMenu()
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al enviar el correo',
+              showConfirmButton: true,
+              confirmButtonColor: '#0d6efd',
+              confirmButtonText: 'Aceptar',
+              customClass: {
+                popup: 'my-swal-font-size',
+              }
+            });
+          }
+        };
+
+        request.open('POST', '/send-email');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+        request.send('email=' + encodeURIComponent(selectedText) + '&cedula=' + encodeURIComponent(cedula));
+
+      }
+
+    }
+
+    function enviarSolicitud() {
+      const token = document.querySelector('#prueba').value;
+      const showed = getCookie("cedula");   
+      const request = new XMLHttpRequest();
+
+      request.onload = function () {
+        const response = JSON.parse(request.response);
+        const alert = document.querySelector('#alert');
+
+        if (response.url) {
+          var miNuevoValor = true;
+          sessionStorage.setItem('miClave', miNuevoValor.toString());
+          const cedula = getCookie("cedula");
+          localStorage.setItem("cedula", cedula);
+          document.cookie = "cedula=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          setTimeout(() => {
+            window.location.replace(response.url);
+          }, 1000)
+        } else {
+          console.log(response);
+          alert.classList.remove("d-none")
+          const errorAlert = document.querySelector('.alert-danger');
+          errorAlert.innerHTML = response.error;
+          errorAlert.style.display = 'block';
+        }
+      };
+
+      request.open('POST', '/verification-token');
+      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');
+      request.send('token=' + encodeURIComponent(token) + '&cedula=' + encodeURIComponent(showed));
+    }
+
+    function bloquear() {
+      var select = document.getElementById("correosSelect");
+      var selectedValue = select.options[select.selectedIndex].value;
+
+      if (selectedValue === "Seleccione su correo") {
+        select.classList.add('is-invalid');
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

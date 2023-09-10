@@ -1,0 +1,47 @@
+<style>* {
+    font-family: "Poppins", sans-serif;
+    color: rgb(85, 83, 83);
+}
+
+body {
+    background-image: url("/static/img/image.jpg");
+    background-size: cover;
+
+}
+
+.card-title {
+    color: rgb(85, 83, 83);
+}
+
+.row {
+    height: 100vh;
+}
+
+.container {
+    display: block;
+    max-width: 500px;
+    margin: auto;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+h1 {
+    text-align: center;
+}
+
+
+.referencia {
+    font-size: 12px;
+}
+
+@keyframes maquinaescribir {
+    from {
+        width: 80%;
+    }
+
+    to {
+        width: 0;
+    }
+}
+
+</style>

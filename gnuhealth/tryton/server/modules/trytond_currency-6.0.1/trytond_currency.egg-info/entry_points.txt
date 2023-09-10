@@ -1,0 +1,6 @@
+
+    [trytond.modules]
+    currency = trytond.modules.currency
+    [console_scripts]
+    trytond_import_currencies = trytond.modules.currency.scripts.import_currencies:run [data]
+    

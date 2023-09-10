@@ -1,0 +1,20 @@
+<style>* {
+    font-family: "Poppins", sans-serif;
+    color: rgb(85, 83, 83);
+}
+
+body {
+    background-image: url("/static/img/image.jpg");
+    background-size: cover;
+}
+
+.card-title {
+    color: rgb(85, 83, 83);
+}
+
+
+.row {
+    height: 100vh;
+}
+
+</style>

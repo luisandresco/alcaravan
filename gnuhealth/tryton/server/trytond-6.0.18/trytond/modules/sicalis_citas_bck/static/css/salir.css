@@ -1,0 +1,45 @@
+<style>* {
+    font-family: "Poppins", sans-serif;
+    color: rgb(85, 83, 83);
+}
+
+.card-title {
+    color: rgb(85, 83, 83);
+}
+
+body {
+    
+    background-image: url("/static/img/image.jpg");
+    background-size: cover;
+
+}
+
+.row {
+    height: 100vh;
+}
+
+.logo {
+    width: 50px;
+    height: 30px;
+}
+
+.prueba {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.contain-auto {
+    margin: auto;
+    padding: 30px 0px 30px 0px;
+}
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+</style>

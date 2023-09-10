@@ -1,0 +1,36 @@
+{
+  "name": "gettext.js",
+  "ignore": [
+    "tests",
+    "lib",
+    "*.md",
+    "*.json",
+    "*.yml",
+    "gulpfile.js"
+  ],
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "gettext",
+    "ngettext",
+    "po"
+  ],
+  "author": {
+    "name": "Guillaume Potier",
+    "email": "guillaume@wisembly.com",
+    "url": "http://guillaumepotier.com/"
+  },
+  "license": "MIT",
+  "main": "dist/gettext.js",
+  "homepage": "https://github.com/guillaumepotier/gettext.js",
+  "version": "0.5.5",
+  "_release": "0.5.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.5.5",
+    "commit": "b1c828acdd2c169c1daacd5b2684d2e5d30cfaba"
+  },
+  "_source": "https://github.com/guillaumepotier/gettext.js.git",
+  "_target": "^0.5",
+  "_originalSource": "gettext.js"
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sicalis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5 col-md-6  m-auto">
+                <h1 class="text-center mb-4" style="color: #2d5d94;">Solicitud de cita médica</h1>
+                <div class="card mx-5 border-0 shadow card">
+                    <div class="card-body  px-5">
+                        <h5 class="card-title text-center pb-2">Ingresa tu cédula de identidad</h5>
+                        <div class="input-group mb-3">
+                            <p class="h6 my-auto border border-1 p-2 rounded-start">C.I</p>
+                            <input type="text" id="cedula" name="cedula" class="form-control"
+                                aria-label="Text input with dropdown button" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);
+                                this.value = this.value.replace(/[^0-9]/g,'');" maxLength="9">
+                        </div>
+                        <div class="alert alert-danger d-none" id="alert" role="alert">
+                            <div class="alert alert-warning d-none" id="alert" role="alert"></div>
+                        </div>
+                        <div>
+                            <button onclick=enviarSolicitud() class="btn btn-primary form-control">Siguiente</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script>
+
+        function enviarSolicitud(){
+            const cedula = document.querySelector('#cedula').value;   
+            const request = new XMLHttpRequest();           
+
+            request.onload = function() {   
+                const status = request.status
+                const response = JSON.parse(request.response);
+                const alert = document.querySelector('#alert');
+                if(response.url && status == 200) {   
+                    alert.classList.add("d-none")
+                    document.cookie = "cedula=" + cedula + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+                    setTimeout(()=>{
+                        window.location.replace(response.url);},1000)
+                                }  
+                else {
+
+                    alert.classList.remove("d-none")
+                    const errorAlert = document.querySelector('.alert-danger');
+                    errorAlert.innerHTML = response.error;
+                    errorAlert.style.display = 'block';
+                }
+              }
+                      
+           request.open('POST', '/ConsultaF');   
+           request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8');  
+           
+           request.send('cedula=' + encodeURIComponent(cedula));
+           }
+           
+
+        //codigo para seleccionar la E o la V
+        var dropdownItems = document.querySelectorAll(".dropdown-item");
+        var cedula = document.getElementById('cedula');
+        dropdownItems.forEach(function (item) {
+            item.addEventListener("click", function () {
+                var selectedValue = this.textContent;
+                if (selectedValue === "E") {
+                    selectedValue = "E";
+                } else if (cedula.length > 8) {
+                    alert("error");
+                    return;
+                }
+                document.querySelector(".dropdown-toggle").textContent = selectedValue;
+                dropdownItems.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+                this.classList.add("active");
+            });
+        });
+        
+    </script>
+
+</body>
+
+</html>
